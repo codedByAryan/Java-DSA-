@@ -1,0 +1,48 @@
+/* Tree Traversals [b] Inorder
+ * [1] Left Subtree
+ * [2] Root
+ * [3] Right Subtree
+ */
+
+public class Transversal2 {
+    static class Node{
+        int data;
+        Node left;
+        Node right;
+        Node(int data){
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    static class BinaryTree{
+        static int idx = -1;
+        static Node buildTree(int Node[]){
+            idx++;
+            if(Node[idx] == -1){
+                return null;
+            }
+            Node newNode = new Node(Node[idx]);
+            newNode.left = buildTree(Node);
+            newNode.right = buildTree(Node);
+            
+            return newNode;
+        }
+
+        // Inorder
+        public static void Inorder(Node root){
+            if(root == null){
+                return;
+            }
+            Inorder(root.left);
+            System.out.print(root.data + " ");
+            Inorder(root.right);
+        }
+    }
+    public static void main(String[] args) {
+        int nodes[] = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        BinaryTree tree = new BinaryTree();
+        Node root = tree.buildTree(nodes);
+        tree.Inorder(root);
+    }
+}
